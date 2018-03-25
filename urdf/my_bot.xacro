@@ -146,7 +146,7 @@
   </joint>
 
   <!-- camera -->
-  <link name='camera'>
+  <link name='camera_link'>
     <inertial>
       <mass value="0.1"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
@@ -171,7 +171,7 @@
   </link>
   <joint type="fixed" name="camera_joint">
     <origin xyz="0.1 0 0" rpy="0 0 0"/>
-    <child link="camera"/>
+    <child link="camera_link"/>
     <parent link="chassis"/>
   </joint>
 
@@ -179,9 +179,8 @@
   <joint type="fixed" name="camera_rgbd_joint">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <child link="camera_rgbd_frame"/>
-    <parent link="camera"/>
+    <parent link="camera_link"/>
   </joint>
-
 
   <!-- hokuyo laser rangefinder -->
   <link name='hokuyo'>
@@ -203,7 +202,7 @@
     <visual name='hokuyo_visual'>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <mesh filename="package://my_bot/meshes/hokuyo.dae"/>
+        <mesh filename="package://slam_project/meshes/hokuyo.dae"/>
       </geometry>
     </visual>
   </link>

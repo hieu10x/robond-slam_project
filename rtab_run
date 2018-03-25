@@ -1,5 +1,7 @@
 #! /bin/bash
 
+export GAZEBO_MODEL_PATH=$(rospack find slam_project)/models
+
 echo ' '
 read -p 'Would you like to clear the previous map database? (y/n): ' ansinput
 
@@ -23,19 +25,19 @@ read -p 'Enter target world destination or d for default: ' input_choice
 
 if [ “$input_choice” = “d” ]
 then
- x-terminal-emulator -x roslaunch slam_project world.launch world_file:=/home/workspace/catkin_ws/src/slam_project/worlds/kitchen_dining.world 2>/dev/null &
-
+ # x-terminal-emulator -x roslaunch slam_project world.launch world_file:=$(rospack find slam_project)/worlds/kitchen_dining.world verbose:=true 2>/dev/null &
+ x-terminal-emulator -x roslaunch slam_project world.launch world_file:=$(rospack find slam_project)/worlds/coffee_shop_4.world verbose:=true 2>/dev/null &
 else
  x-terminal-emulator -x roslaunch slam_project world.launch world_file:=$input_choice 2>/dev/null &
 fi
 
 ## my changes
 #rm -f ~/.ros/rtabmap.db
-#x-terminal-emulator -x roslaunch slam_project world.launch world_file:=/home/workspace/catkin_ws/src/slam_project/worlds/kitchen_dining.world 2>/dev/null &
-#
-#sleep 3 &&
-#
-#x-terminal-emulator -x roslaunch slam_project teleop.launch 2>/dev/null &
+#x-terminal-emulator -x roslaunch slam_project world.launch world_file:=/home/hieu/catkin_ws/src/slam_project/worlds/kitchen_dining.world 2>/dev/null &
+
+sleep 3 &&
+
+x-terminal-emulator -x roslaunch slam_project teleop.launch 2>/dev/null &
 
 sleep 3 &&
 
